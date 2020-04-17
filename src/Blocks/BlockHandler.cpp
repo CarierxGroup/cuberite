@@ -636,9 +636,9 @@ void Temporary::RegisterAllBlockHandlers(BlockTypeRegistry & aRegistry)
 {
 	static struct
 	{
-		const char * newBlockTypeName;
-		BLOCKTYPE oldBlockType;
-	} regs[] =
+		const char * NewBlockTypeName;
+		BLOCKTYPE OldBlockType;
+	} BlockRegistry[] =
 	{
 		{"minecraft:acacia_button",                  E_BLOCK_WOODEN_BUTTON},
 		{"minecraft:acacia_door",                    E_BLOCK_ACACIA_DOOR},
@@ -1319,9 +1319,9 @@ void Temporary::RegisterAllBlockHandlers(BlockTypeRegistry & aRegistry)
 		{"minecraft:zombie_wall_head",               E_BLOCK_HEAD},
 	};
 
-	for (const auto & r: regs)
+	for (const auto & Entry : BlockRegistry)
 	{
-		std::shared_ptr<cBlockHandler> handler(::CreateBlockHandler(r.oldBlockType));
-		aRegistry.registerBlockType("<built-in>", r.newBlockTypeName, handler);
+		std::shared_ptr<cBlockHandler> Handler(::CreateBlockHandler(Entry.OldBlockType));
+		aRegistry.registerBlockType("<built-in>", Entry.NewBlockTypeName, Handler);
 	}
 }
